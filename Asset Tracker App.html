@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>EventShare Cloud — Asset Tracker</title>
+
+    <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css" />
+    <script type="text/javascript" src="JS/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="JS/jquery-3.6.0.min.js"></script>
+
+    <script type="text/javascript" src="JS/app.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <!--Header-->
+      <div class="row align-items-start mt-3">
+        <div class="col-12 text-center">
+          <h3 class="mb-1">EventShare Cloud — Asset Tracker</h3>
+          <div class="text-muted" style="font-size: 13px;">
+            Metadata stored in Azure SQL • Images stored in Azure Blob
+          </div>
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div class="row mt-3">
+        <div class="col-12">
+          <div id="statusBox" class="alert alert-secondary py-2" style="display:none;"></div>
+        </div>
+      </div>
+
+      <!--New Asset Box-->
+      <div class="row align-items-start mt-2">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header bg-white">
+              <strong>Add Asset Metadata</strong>
+              <div class="text-muted" style="font-size: 12px;">
+                Creates a new asset record (Azure SQL table: <code>assetTracking</code>)
+              </div>
+            </div>
+
+            <div class="card-body">
+              <form style="font-size: 10pt;" id="newAssetForm">
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <label for="EventID" class="form-label">Event ID</label>
+                    <input type="text" class="form-control" id="EventID" placeholder="event-001" />
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="AssetName" class="form-label">Asset Name</label>
+                    <input type="text" class="form-control" id="AssetName" placeholder="WelcomePhoto.jpg" />
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="MediaType" class="form-label">Media Type</label>
+                    <select id="MediaType" class="form-select">
+                      <option value="image/jpeg" selected>image/jpeg</option>
+                      <option value="image/png">image/png</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="BlobUrl" class="form-label">Blob URL</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="BlobUrl"
+                      placeholder="https://<storage>.blob.core.windows.net/media/file.jpg"
+                    />
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="UploadedBy" class="form-label">Uploaded By</label>
+                    <input type="text" class="form-control" id="UploadedBy" placeholder="Danyal" />
+                  </div>
+
+                  <div class="col-12">
+                    <label for="Caption" class="form-label">Caption</label>
+                    <input type="text" class="form-control" id="Caption" placeholder="Short description of the memory" />
+                  </div>
+                </div>
+
+                <div class="mt-3 d-flex gap-2">
+                  <button type="button" id="subNewForm" class="btn btn-primary">
+                    Submit (Create)
+                  </button>
+                  <button type="button" id="resetForm" class="btn btn-outline-secondary">
+                    Reset
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- View Assets -->
+      <div class="row align-items-start mt-4">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header bg-white">
+              <strong>View Assets</strong>
+              <div class="text-muted" style="font-size: 12px;">
+                Retrieves records from your REST API (RAA / RIA)
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="row g-3 align-items-end">
+                <div class="col-md-5">
+                  <label for="FilterEventID" class="form-label">Filter by Event ID (optional)</label>
+                  <input type="text" class="form-control" id="FilterEventID" placeholder="event-001" />
+                </div>
+                <div class="col-md-3">
+                  <button id="retAssets" type="button" class="btn btn-success w-100">
+                    View Assets
+                  </button>
+                </div>
+                <div class="col-md-4">
+                  <button id="clearAssets" type="button" class="btn btn-outline-secondary w-100">
+                    Clear List
+                  </button>
+                </div>
+              </div>
+
+              <hr class="my-3" />
+
+              <div id="AssetList">
+                <h5 class="text-muted">
+                  Click <strong>View Assets</strong> to load metadata from Azure SQL.
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="row my-4">
+        <div class="col-12 text-center text-muted" style="font-size: 12px;">
+          EventShare Cloud • Azure SQL (metadata) + Azure Blob (media) • REST v1
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
